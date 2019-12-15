@@ -11,7 +11,7 @@ has 'warnings'   => ( is => 'rw', default => 1 );
 has 'simplemode' => ( is => 'rw', default => 0 );
 has 'Version'    => ( is => 'rw', default => 1 );
 
-sub get_album_filename {
+sub getalbumfilename {
 
 	my ( $self, $album_id, $album_row ) = @_;
 	$album_row = $self->Album->find(
@@ -20,28 +20,28 @@ sub get_album_filename {
 		}
 	) unless $album_row;
 	if ( $self->Version == 2 ) {
-		return sprintf( '[2.%s]', $self->number_convert_to_1( $album_row->id ) );
+		return sprintf( '[2.%s]', $self->numberconvertto1( $album_row->id ) );
 	} else {
-		return sprintf( '%s[2-%s]', $album_row->title, $self->number_convert_to_1( $album_row->id ), );
+		return sprintf( '%s[2-%s]', $album_row->title, $self->numberconvertto1( $album_row->id ), );
 	}
 
 }
 
-sub number_convert_to_1 {
+sub numberconvertto1 {
 
 	my ( $self, $int ) = @_;
 	return lc( encode_base36( $int ) );
 
 }
 
-sub number_convert_from_1 {
+sub numberconvertfrom1 {
 
 	my ( $self, $string ) = @_;
 	return decode_base36( lc( $string ) );
 
 }
 
-sub get_artist_dirname {
+sub getartistdirname {
 
 	my ( $self, $album_row ) = @_;
 	my $performer_row = $album_row->search_related( 'performer' )->first();
@@ -52,18 +52,18 @@ sub get_artist_dirname {
 
 	# 	warn $performer_row->name;
 	if ( $self->Version == 2 ) {
-		return sprintf( '[1.%s]', $self->number_convert_to_1( $performer_row->id ), );
+		return sprintf( '[1.%s]', $self->numberconvertto1( $performer_row->id ), );
 	} else {
-		return sprintf( '%s[1-%s]', $performer_row->name, $self->number_convert_to_1( $performer_row->id ), );
+		return sprintf( '%s[1-%s]', $performer_row->name, $self->numberconvertto1( $performer_row->id ), );
 	}
 
 }
 
-sub get_track_filename {
+sub gettrackfilename {
 
 	my ( $self, $album_id, $track_no, $track_row_tmp, $file_number ) = @_;
 	if ( $self->warnings > 2 ) { warn "Get track filename"; }
-	my ( $track_id, $gsa_track_id, $track_row ) = $self->track_id_for( $album_id, $track_no, $track_row_tmp );
+	my ( $track_id, $gsa_track_id, $track_row ) = $self->trackidfor( $album_id, $track_no, $track_row_tmp );
 	die "$album_id:$track_no track not found" unless ( $track_row );
 	my $track;
 	if ( $self->Version == 2 ) {
@@ -73,7 +73,7 @@ sub get_track_filename {
 	} elsif ( $self->Version == 4 ) {
 
 		# 		die "yes";
-		$track = sprintf( '[2-%s][%02d][%s.%s][m-%s]%s', $self->number_convert_to_1( $track_row->album_id ), $track_row->track_no, $gsa_track_id, $file_number || 0, $track_row->performer_id, $track_row->safe_title || $track_id );
+		$track = sprintf( '[2-%s][%02d][%s.%s][m-%s]%s', $self->numberconvertto1( $track_row->album_id ), $track_row->track_no, $gsa_track_id, $file_number || 0, $track_row->performer_id, $track_row->safe_title || $track_id );
 	} else {
 		$track = sprintf( '[%02d]%s[%s.%s]', $track_row->track_no, $track_row->title, $gsa_track_id, $file_number || 0 );
 	}
@@ -85,7 +85,7 @@ sub get_track_filename {
 
 }
 
-sub track_id_for {
+sub trackidfor {
 
 	my ( $self, $album_id, $track_no, $track_row ) = @_;
 	$track_row = $self->Track->find(
@@ -104,7 +104,7 @@ sub track_id_for {
 	} else {
 		$sprintstring = '3-%s';
 	}
-	return ( $track_row->id, sprintf( $sprintstring, $self->number_convert_to_1( $track_row->id ) ), $track_row );
+	return ( $track_row->id, sprintf( $sprintstring, $self->numberconvertto1( $track_row->id ) ), $track_row );
 
 }
 1;

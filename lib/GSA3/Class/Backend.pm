@@ -17,7 +17,7 @@ ACCESSORS: {
 	);
 }
 
-sub get_extended_track {
+sub getextendedtrack {
 	my ( $self, $trackint ) = @_;
 
 	my $trow = $self->tsqla->get(
@@ -51,7 +51,7 @@ sub get_extended_track {
 
 }
 
-sub _build_tsqla {
+sub _buildtsqla {
 	my ( $self ) = @_;
 	my $sqla = Toolbox::SqlAbstract->new(
 		{

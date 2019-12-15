@@ -10,7 +10,7 @@ use parent qw/
 	As GSA3::Name::Simple, but provides an actual title
 =cut
 
-sub file_name {
+sub filename {
 	my ( $self, $p ) = @_;
 
 }

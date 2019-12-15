@@ -8,12 +8,12 @@ extends 'Ase2::Okazu::Store::Local' => {-version => 0.01};
 has 'TitleObj' => ( is => 'rw', );
 
 #always with okazu rows
-sub parent_directory {
+sub parentdirectory {
 
 	my ( $self, $row ) = @_;
 	my $album_row = $row->search_related( 'okazus_to_track' )->search_related( 'track' )->search_related( 'album' )->first();
 	if ( $album_row ) {
-		my $path = sprintf( '%s/%s/%s', $self->{local_path}, $self->TitleObj->get_artist_dirname( $album_row ) || 'GSA-No_artist', $self->TitleObj->get_album_filename( undef, $album_row ), );
+		my $path = sprintf( '%s/%s/%s', $self->{local_path}, $self->TitleObj->getartistdirname( $album_row ) || 'GSA-No_artist', $self->TitleObj->getalbumfilename( undef, $album_row ), );
 
 		# 		warn $path;
 		return $path;
@@ -23,14 +23,14 @@ sub parent_directory {
 
 }
 
-sub file_name {
+sub filename {
 
 	my ( $self, $okazu_row ) = @_;
 	my $okazu_to_track = $okazu_row->search_related( 'okazus_to_track' )->first(); #can only ever be 1
 	die "No matching okazus_to_track record " unless ( $okazu_to_track );
 	my $track_row = $okazu_to_track->search_related( 'track' )->first();
 	die "No matching track record (?!)" unless ( $track_row );
-	my $result = $self->TitleObj->get_track_filename( undef, undef, $track_row, $okazu_to_track->file_number );
+	my $result = $self->TitleObj->gettrackfilename( undef, undef, $track_row, $okazu_to_track->file_number );
 	use Data::Dumper;
 
 	# 	die Dumper($result);

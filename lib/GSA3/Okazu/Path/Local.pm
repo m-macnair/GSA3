@@ -7,11 +7,11 @@ use Moose;
 extends 'GSA3::Okazu::Path' => {-version => 0.01};
 has 'local_path' => ( is => 'rw', default => "./" );
 
-sub directory_name_sub {
+sub directorynamesub {
 
 	my ( $self, $okazu_row ) = @_;
 	if ( $okazu_row->content_block_id ) {
-		my $path = sprintf( '%s/%s', $self->{local_path}, $self->album_dir_for( $okazu_row ) );
+		my $path = sprintf( '%s/%s', $self->{local_path}, $self->albumdirfor( $okazu_row ) );
 		return $path;
 	} else {
 		warn $okazu_row->id, " has no content block" if ( $self->{warning} > 0 );

@@ -7,14 +7,14 @@ use namespace::autoclean;
 extends 'Ase2::Okazu::Store::Local' => {-version => 0.01};
 has 'TitleObj' => ( is => 'rw', );
 
-sub file_name {
+sub filename {
 
 	my ( $self, $okazu_row ) = @_;
 	my $okazu_to_track = $okazu_row->search_related( 'okazus_to_track' )->first(); #can only ever be 1
 	die "No matching okazus_to_track record " unless ( $okazu_to_track );
 	my $track_row = $okazu_to_track->search_related( 'track' )->first();
 	die "No matching track record (?!)" unless ( $track_row );
-	my $result = $self->TitleObj->get_track_filename( undef, undef, $track_row, $okazu_to_track->file_number );
+	my $result = $self->TitleObj->gettrackfilename( undef, undef, $track_row, $okazu_to_track->file_number );
 	use Data::Dumper;
 
 	# 	die Dumper($result);

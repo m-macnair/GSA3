@@ -24,7 +24,7 @@ our $VERSION = '0.01';
 	Absorbs CUE files to the db
 =cut
 
-sub cue_test {
+sub cuetest {
 
 	my ( $self ) = @_;
 	my $cue_dir = "/store/new_noise/T/TMC/2015 1.06.30 cue sheets/";
@@ -34,7 +34,7 @@ sub cue_test {
 			no_chdir => 1,
 			wanted   => sub {
 				return if -d;
-				$self->cue_import( $_ );
+				$self->cueimport( $_ );
 			},
 		},
 		$cue_dir
@@ -42,7 +42,7 @@ sub cue_test {
 
 }
 
-sub cue_import {
+sub cueimport {
 
 	my ( $self, $cue_path ) = @_;
 	my $cue = Audio::Cuefile::Parser->new( $cue_path );

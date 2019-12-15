@@ -133,7 +133,7 @@ sub BUILD {
 }
 
 #this allows for more than one version of each file
-sub install_local_track {
+sub installlocaltrack {
 
 	my ( $self, $local_file_path, $track_id ) = @_;
 	my $href = $self->prepare_local_file( $local_file_path );
@@ -149,7 +149,7 @@ sub install_local_track {
 			if ( $create_result->{success} && defined( $track_id ) ) {
 
 				#new record, dance parties forever
-				$self->new_okazu_to_track( $search_criteria );
+				$self->newokazutotrack( $search_criteria );
 			} else {
 				if ( $create_result->{duplicate} ) {
 					my $okazu_to_track_row = $self->OkazuToTrack->find(
@@ -167,14 +167,14 @@ sub install_local_track {
 							#old format record, update
 							$okazu_to_track_row->update(
 								{
-									file_number => $self->new_track_file_number( $track_id ),
+									file_number => $self->newtrackfilenumber( $track_id ),
 								}
 							);
 						}
 					} else {
 
 						#no record, make a new one
-						$self->new_okazu_to_track( $search_criteria );
+						$self->newokazutotrack( $search_criteria );
 					}
 				} else {
 					die "track id: $track_id";
@@ -191,7 +191,7 @@ sub install_local_track {
 
 }
 
-sub new_track_file_number {
+sub newtrackfilenumber {
 
 	my ( $self, $track_id ) = @_;
 	my $file_number = $self->OkazuToTrack->search( {track_id => $track_id} )->get_column( 'file_number' )->max();
@@ -204,10 +204,10 @@ sub new_track_file_number {
 
 }
 
-sub new_okazu_to_track {
+sub newokazutotrack {
 
 	my ( $self, $row_data ) = @_;
-	my $file_number = $self->new_track_file_number( $row_data->{track_id} );
+	my $file_number = $self->newtrackfilenumber( $row_data->{track_id} );
 	$row_data->{file_number} = $file_number;
 	return $self->OkazuToTrack->create( $row_data );
 

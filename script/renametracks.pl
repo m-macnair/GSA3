@@ -40,8 +40,8 @@ sub process_file {
 
 	my $defunkt = $p->{name}->defunk( $stripstring );
 	if ( $defunkt ) {
-		my $extended = $p->{bend}->get_extended_track( $defunkt );
-		my ( $newfile, $version ) = $p->{name}->file_name( $extended );
+		my $extended = $p->{bend}->getextendedtrack( $defunkt );
+		my ( $newfile, $version ) = $p->{name}->filename( $extended );
 		my $newpath;
 		my $safeishtitle = $extended->{trow}->{safe_title};
 		$safeishtitle =~ s|%20| |g;

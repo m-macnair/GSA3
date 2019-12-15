@@ -10,49 +10,49 @@ extends 'GSA3::Class::Name';
 	To be used for local storage 
 =cut
 
-sub file_name {
+sub filename {
 	my ( $self, $p ) = @_;
-	my $album_str = $self->album_str( $p );
-	my $track_str = $self->track_str( $p );
+	my $album_str = $self->albumstr( $p );
+	my $track_str = $self->trackstr( $p );
 	if ( wantarray ) {
-		return ( "$album_str$track_str", $self->version_str( $p ) );
+		return ( "$album_str$track_str", $self->versionstr( $p ) );
 	} else {
 		return "$album_str$track_str";
 	}
 
 }
 
-sub dir_name {
+sub dirname {
 	my ( $self, $p ) = @_;
-	my $album_str       = $self->album_str( $p );
-	my $album_maker_str = $self->album_maker_str( $p );
+	my $album_str       = $self->albumstr( $p );
+	my $album_maker_str = $self->albummakerstr( $p );
 	return "$album_maker_str$album_str";
 }
 
-sub album_maker_str {
+sub albummakerstr {
 	my ( $self, $p ) = @_;
 	return sprintf( '[AM.%s]', $p->{arow}->{performer_id} );
 
 }
 
-sub track_maker_str {
+sub trackmakerstr {
 	my ( $self, $p ) = @_;
 	return sprintf( '[TM.%s]', $p->{mrow}->{id} );
 
 }
 
-sub track_str {
+sub trackstr {
 	my ( $self, $p ) = @_;
 
 	return sprintf( '[%02d][T.%d]', $p->{trow}->{track_no}, $p->{trow}->{id} );
 }
 
-sub album_str {
+sub albumstr {
 	my ( $self, $p ) = @_;
 	return sprintf( '[A.%s]', $p->{trow}->{album_id} );
 }
 
-sub version_str {
+sub versionstr {
 	my ( $self, $p ) = @_;
 	if ( $p->{frow} ) {
 		return sprintf( '[V.%s]', $p->{frow}->{version} );
