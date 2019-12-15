@@ -42,7 +42,7 @@ sub process_file {
 	my ( $p, $file ) = @_;
 
 	return unless index( $file, '.mp3' ) != -1;
-	return unless index( $file, '[3.' ) != -1;
+	return unless index( $file, '[3-' ) != -1;
 
 	my $dir;
 	( $file, $dir ) = Toolbox::FileSystem::filebasename( $file );
@@ -50,7 +50,7 @@ sub process_file {
 	my $stripstring = $p->{name}->stripstring(
 		$file,
 		{
-			stringstarter => '\[3\.'
+			stringstarter => '\[3-'
 		}
 	);
 
