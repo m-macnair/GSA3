@@ -8,7 +8,19 @@ extends 'GSA3::Class::Name';
 =head1
 	Maximally simplified - T for track, A for Album, M for maker/artist, `.` for the separator, and integer value 
 	To be used for local storage 
+=head3
+	the fully qualified name on GSA storage which, if appended to a root path, will get the file if you also know the file extension
 =cut
+
+sub fullname {
+	my ( $self, $p ) = @_;
+	my $album_str       = $self->albumstr( $p );
+	my $track_str       = $self->trackstr( $p );
+	my $versionstr      = $self->versionstr( $p );
+	my $album_maker_str = $self->albummakerstr( $p );
+
+	return "$album_maker_str/$album_str/$track_str$versionstr.mp3";
+}
 
 sub filename {
 	my ( $self, $p ) = @_;

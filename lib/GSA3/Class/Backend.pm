@@ -13,7 +13,7 @@ ACCESSORS: {
 	has tsqla => (
 		is      => 'rw',
 		lazy    => 1,
-		builder => '_build_tsqla'
+		builder => '_buildtsqla'
 	);
 }
 
