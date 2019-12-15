@@ -1,11 +1,10 @@
-use strict; 
-use warnings; 
+use strict;
+use warnings;
 use GSA3::Name;
-main(@ARGV);
+main( @ARGV );
 
 sub main {
-	my ($string) = @_;
-	($string) = ( $string =~ m|([^.-]*)[.-]([^.-]*)[.-]|);
-	
+	my ( $string ) = @_;
+	( $string ) = ( $string =~ m|([^.-]*)[.-]([^.-]*)[.-]| );
 
 }
