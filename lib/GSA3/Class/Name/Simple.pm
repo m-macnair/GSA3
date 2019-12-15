@@ -66,10 +66,10 @@ sub albumstr {
 
 sub versionstr {
 	my ( $self, $p ) = @_;
-	if ( $p->{frow} ) {
-		return sprintf( '[V.%s]', $p->{frow}->{version} );
+	if ( $p->{orow} ) {
+		return sprintf( '[F.%s]', $p->{orow}->{file_number} );
 	}
-	return '[V.0]';
+	return '[F.0]';
 }
 
 1;

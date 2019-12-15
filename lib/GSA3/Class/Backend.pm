@@ -42,11 +42,19 @@ sub getextendedtrack {
 			id => $trow->{performer_id},
 		}
 	);
+	
+	my $orow = $self->tsqla->get(
+		'okazu_to_track',
+		{
+			track_id => $trow->{id},
+		}
+	);
 
 	return {
 		trow => $trow,
 		arow => $arow,
 		mrow => $mrow,
+		orow => $orow
 	};
 
 }

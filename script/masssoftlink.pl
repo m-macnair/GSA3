@@ -46,7 +46,7 @@ sub process_file {
 
 	my $dir;
 	( $file, $dir ) = Toolbox::FileSystem::filebasename( $file );
-	warn $file;
+
 	my $stripstring = $p->{name}->stripstring(
 		$file,
 		{
