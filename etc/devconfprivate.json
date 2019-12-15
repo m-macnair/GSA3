@@ -1,7 +1,0 @@
-{
-	"db:":{
-		"dsn":"dbi:mysql:gsa3",
-		"user":"root",
-		"pass":"rootpassword"
-	}
-}

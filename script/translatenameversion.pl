@@ -20,6 +20,7 @@ sub main {
 	my $extended        = $gsa_be->get_extended_track( $gsa_name_simple->defunk( $string ) );
 	my ( $file, $version ) = $gsa_name_simple->file_name( $extended );
 	my $path = $gsa_name_simple->dir_name( $extended );
+
 	print "$path/$file$extended->{trow}->{safe_title}$version.mp3$/";
 
 }
